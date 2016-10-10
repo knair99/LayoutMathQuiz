@@ -13,7 +13,7 @@ import android.os.Bundle;
 public class SummaryDialog extends DialogFragment {
 
     public AlertDialog.Builder builder;
-    public String strTextToUpdate;
+    public static String strTextToUpdate;
     Activity myActivity;
 
     @Override
