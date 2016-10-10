@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,7 @@ public class QuestionFragment extends Fragment {
     public MyTimerTask my_timer_task;
     public Timer timer;
     public boolean bQuizOver = false;
+    public CountDownTimer cdTimer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,7 +144,21 @@ public class QuestionFragment extends Fragment {
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();
         if(!bQuizOver) {
-            ScheduleNewTimer();
+            //ScheduleNewTimer();
+
+            cdTimer = new CountDownTimer(5000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    AppCompatActivity ab = (AppCompatActivity) getActivity();
+                    String title = ab.getSupportActionBar().getTitle().toString();
+                    title = title + " Time left : " + millisUntilFinished/1000;
+                }
+
+                public void onFinish() {
+                    SetImageForAnswer("wrong");
+                    MoveToNextQuestion();
+                }
+            }.start();
         }
 
         return rootview;
@@ -233,6 +249,8 @@ public class QuestionFragment extends Fragment {
             if (Integer.parseInt(strAnsParsed) == numCorrectAnswer) {
                 numScore = numScore + 1;
                 strLatestAnswer = strAnswerSoFar = "=";
+                //Stop the countdowntimer
+                cdTimer.cancel();
                 SetImageForAnswer("correct");
                 MoveToNextQuestion();
 
