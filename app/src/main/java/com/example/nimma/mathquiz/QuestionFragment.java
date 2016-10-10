@@ -103,6 +103,7 @@ public class QuestionFragment extends Fragment {
                 numQuestionsSoFar = 0; //Remember to reset the questions so far, to restart the game from home
                 numScore = 0; //Same for score
                 //Cancel the timer?
+                my_timer_task.cancel();
                 bQuizOver = true;
             }
 
@@ -129,8 +130,12 @@ public class QuestionFragment extends Fragment {
         String title = "MathQuiz  -  Question # " + numQuestionsSoFar + " out of 10";
         AppCompatActivity ab = (AppCompatActivity) getActivity();
         ab.getSupportActionBar().setTitle(title);
+
+
         //Schedule a new question for five seconds
-        ScheduleNewQuestion();
+        //ScheduleNewQuestion();
+        ScheduleNewTimer();
+
         return rootview;
     }
 
@@ -151,6 +156,12 @@ public class QuestionFragment extends Fragment {
         }, TIME_REMAINING); //Time remaining for orientation changes
     }
 
+    private void ScheduleNewTimer(){
+
+        my_timer_task = new MyTimerTask();
+        Timer timer = new Timer();
+        timer.schedule(my_timer_task, TIME_REMAINING);
+    }
 
     public class MyTimerTask extends TimerTask {
         @Override
