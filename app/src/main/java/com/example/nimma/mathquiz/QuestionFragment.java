@@ -136,7 +136,7 @@ public class QuestionFragment extends Fragment {
         }
 
         //Set question number in action bar
-        String title = "MathQuiz  -  Question # " + numQuestionsSoFar + " out of 10";
+        String title = "MathQuiz  -  Q. " + numQuestionsSoFar + " out of 10";
         AppCompatActivity ab = (AppCompatActivity) getActivity();
         ab.getSupportActionBar().setTitle(title);
 
@@ -146,12 +146,10 @@ public class QuestionFragment extends Fragment {
         if(!bQuizOver) {
             //ScheduleNewTimer();
 
-            cdTimer = new CountDownTimer(5000, 1000) {
+            cdTimer = new CountDownTimer(TIME_REMAINING, 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    AppCompatActivity ab = (AppCompatActivity) getActivity();
-                    String title = ab.getSupportActionBar().getTitle().toString();
-                    title = title + " Time left : " + millisUntilFinished/1000;
+                    //Countdown logic here
                 }
 
                 public void onFinish() {
@@ -220,6 +218,9 @@ public class QuestionFragment extends Fragment {
         endTime = System.currentTimeMillis();
         TIME_REMAINING = QUESTION_TIMER - (endTime - startTime);
         outState.putLong(STR_TIME_REMAINING, TIME_REMAINING);
+
+        //Cancel timer again?
+        cdTimer.cancel();
     }
 
 
@@ -260,12 +261,14 @@ public class QuestionFragment extends Fragment {
 
             if(strAnsParsed != null && !strAnsParsed.trim().isEmpty()) {
                 if (Integer.parseInt(strAnsParsed) != numCorrectAnswer) {
+                    cdTimer.cancel();
                     SetImageForAnswer("wrong");
                     strLatestAnswer = strAnswerSoFar = "=";
                     MoveToNextQuestion();
                 }
             }
             else{
+                cdTimer.cancel();
                 SetImageForAnswer("wrong");
                 MoveToNextQuestion();
             }
