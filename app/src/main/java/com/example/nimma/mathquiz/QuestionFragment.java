@@ -58,9 +58,9 @@ public class QuestionFragment extends Fragment {
     public static String strChosenOperator;
 
     //Hail mary timer
-    public static MyTimerTask my_timer_task;
-    public static Timer timer;
-    public static boolean bQuizOver = false;
+    public MyTimerTask my_timer_task;
+    public Timer timer;
+    public boolean bQuizOver = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
