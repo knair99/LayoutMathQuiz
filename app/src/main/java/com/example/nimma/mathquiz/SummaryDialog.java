@@ -30,7 +30,9 @@ public class SummaryDialog extends DialogFragment {
         builder.setPositiveButton("Home", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked OK button
-                myActivity.finish();
+                if(myActivity != null) {
+                    myActivity.finish();
+                }
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
                 startActivity(intent);
             }

@@ -220,7 +220,9 @@ public class QuestionFragment extends Fragment {
         outState.putLong(STR_TIME_REMAINING, TIME_REMAINING);
 
         //Cancel timer again?
-        cdTimer.cancel();
+        if(cdTimer != null) {
+            cdTimer.cancel();
+        }
     }
 
 
