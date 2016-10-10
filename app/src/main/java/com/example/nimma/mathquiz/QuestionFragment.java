@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +65,7 @@ public class QuestionFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootview = inflater.inflate(R.layout.fragment_question, container, false);
+
 
         startTime = System.currentTimeMillis();
 
@@ -122,6 +125,10 @@ public class QuestionFragment extends Fragment {
             tv3.setText(strAnswerSoFar);
         }
 
+        //Set question number in action bar
+        String title = "MathQuiz  -  Question # " + numQuestionsSoFar + " out of 10";
+        AppCompatActivity ab = (AppCompatActivity) getActivity();
+        ab.getSupportActionBar().setTitle(title);
         //Schedule a new question for five seconds
         ScheduleNewQuestion();
         return rootview;

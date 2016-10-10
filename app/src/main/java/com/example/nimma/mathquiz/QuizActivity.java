@@ -1,5 +1,7 @@
 package com.example.nimma.mathquiz;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,7 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
 
         //Make sure we know the fragment instances
         frag_num_pad = (NumberPadFragment) getFragmentManager().findFragmentById(R.id.numberpad_fragment);
@@ -48,5 +51,24 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         //Call the method in there with the new data
         frag_question.updateAnswer(strInput);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Exit Quiz?")
+                .setMessage("Are you sure you want to exit this Quiz?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
