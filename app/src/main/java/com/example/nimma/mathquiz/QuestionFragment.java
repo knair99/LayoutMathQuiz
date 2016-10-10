@@ -103,7 +103,9 @@ public class QuestionFragment extends Fragment {
                 numQuestionsSoFar = 0; //Remember to reset the questions so far, to restart the game from home
                 numScore = 0; //Same for score
                 //Cancel the timer?
-                my_timer_task.cancel();
+                if(my_timer_task!= null){
+                    my_timer_task.cancel();
+                }
                 bQuizOver = true;
             }
 
@@ -134,12 +136,14 @@ public class QuestionFragment extends Fragment {
 
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();
-        ScheduleNewTimer();
+        if(bQuizOver != false) {
+            ScheduleNewTimer();
+        }
 
         return rootview;
     }
 
-
+/*
     private void ScheduleNewQuestion() {
         //Change the question in 5 seconds
         new Timer().schedule(new TimerTask(){
@@ -155,7 +159,7 @@ public class QuestionFragment extends Fragment {
             }
         }, TIME_REMAINING); //Time remaining for orientation changes
     }
-
+*/
     private void ScheduleNewTimer(){
 
         my_timer_task = new MyTimerTask();
