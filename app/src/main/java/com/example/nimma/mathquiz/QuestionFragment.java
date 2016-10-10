@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +59,7 @@ public class QuestionFragment extends Fragment {
 
     //Hail mary timer
     public static MyTimerTask my_timer_task;
+    public static Timer timer;
     public static boolean bQuizOver = false;
 
     @Override
@@ -97,7 +100,9 @@ public class QuestionFragment extends Fragment {
                 //Create the dialog for end of quiz
                 final SummaryDialog sd = new SummaryDialog();
                 final String text = "Your score is: " + numScore + " out of " + TOTAL_QUESTIONS;
+
                 sd.UpdateTextDialog(getActivity(), text);
+                sd.setCancelable(false);
                 sd.show(getActivity().getFragmentManager(), "SummaryDialog");
 
                 numQuestionsSoFar = 0; //Remember to reset the questions so far, to restart the game from home
@@ -136,7 +141,7 @@ public class QuestionFragment extends Fragment {
 
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();
-        if(bQuizOver != false) {
+        if(!bQuizOver) {
             ScheduleNewTimer();
         }
 
@@ -162,8 +167,10 @@ public class QuestionFragment extends Fragment {
 */
     private void ScheduleNewTimer(){
 
+        if(bQuizOver) return;
+
         my_timer_task = new MyTimerTask();
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(my_timer_task, TIME_REMAINING);
     }
 

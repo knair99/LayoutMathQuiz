@@ -19,7 +19,7 @@ public class SummaryDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //Display a dialog with the score
-        builder = new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity()).setCancelable(false);
 
         //Set the score
         builder.setTitle("Done!");
@@ -43,4 +43,6 @@ public class SummaryDialog extends DialogFragment {
         strTextToUpdate = text;
         myActivity = activity;
     }
+
+
 }
