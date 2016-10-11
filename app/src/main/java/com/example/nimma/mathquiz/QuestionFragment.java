@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -143,6 +144,8 @@ public class QuestionFragment extends Fragment {
         ab.getSupportActionBar().setTitle(title);
 
 
+
+
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();
         if(!bQuizOver && !bDontStartTimer) {
@@ -158,9 +161,14 @@ public class QuestionFragment extends Fragment {
 
             public void onTick(long millisUntilFinished) {
                 //Countdown logic here
+                //Show progress bar
+                ProgressBar pb = (ProgressBar) getView().findViewById(R.id.progressBar);
+                pb.setProgress(pb.getProgress() + 1);
             }
 
             public void onFinish() {
+                ProgressBar pb = (ProgressBar) getView().findViewById(R.id.progressBar);
+                pb.setProgress(pb.getProgress() + 1);
                 SetImageForAnswer("wrong");
                 MoveToNextQuestion();
             }

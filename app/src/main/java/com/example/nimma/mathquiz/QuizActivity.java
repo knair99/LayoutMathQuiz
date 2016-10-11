@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 
 public class QuizActivity extends AppCompatActivity implements NumberPadFragment.OnAnswerInput{
@@ -32,6 +33,10 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
         setContentView(R.layout.activity_quiz);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Init progressBar
+        ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
+        pb.setMax(5); //For five seconds
 
 
         //Make sure we know the fragment instances
