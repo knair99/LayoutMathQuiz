@@ -28,6 +28,8 @@ public class ExitDialog extends DialogFragment {
 
         frag_question = (QuestionFragment) myActivity.getFragmentManager().findFragmentById(R.id.question_fragment);
 
+        frag_question.bDontStartTimer = true;
+
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -51,8 +53,9 @@ public class ExitDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                        frag_question.bDontStartTimer = false;
                         frag_question.CreateAndStartTimer();
-                        myActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                        //myActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
                     }
                 });

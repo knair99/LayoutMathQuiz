@@ -39,6 +39,7 @@ public class QuestionFragment extends Fragment {
     public static final String STR_TIME_REMAINING = "TIME_REMAINING";
     public static final int TOTAL_QUESTIONS = 10;
     public static final String STR_QUIZ_OVER = "STR_QUIZ_OVER";
+    public static final String STR_DONT_START_TIMER = "STR_DONT_START_TIMER";
 
 
     //These are changeables
@@ -62,6 +63,7 @@ public class QuestionFragment extends Fragment {
     //Countdown timer
     public boolean bQuizOver = false;
     public CountDownTimer cdTimer;
+    public boolean bDontStartTimer = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +90,8 @@ public class QuestionFragment extends Fragment {
 
             TIME_REMAINING = savedInstanceState.getLong(STR_TIME_REMAINING);
             bQuizOver = savedInstanceState.getBoolean(STR_QUIZ_OVER);
+
+            bDontStartTimer = savedInstanceState.getBoolean(STR_DONT_START_TIMER);
         }
         else {
             //Generate random numbers
@@ -141,7 +145,7 @@ public class QuestionFragment extends Fragment {
 
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();
-        if(!bQuizOver) {
+        if(!bQuizOver && !bDontStartTimer) {
             //ScheduleNewTimer();
             CreateAndStartTimer();
         }
@@ -182,6 +186,7 @@ public class QuestionFragment extends Fragment {
         outState.putLong(STR_TIME_REMAINING, TIME_REMAINING);
 
         outState.putBoolean(STR_QUIZ_OVER, bQuizOver);
+        outState.putBoolean(STR_DONT_START_TIMER, bDontStartTimer);
 
         //Cancel timer again?
         if(cdTimer != null) {

@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,9 +19,12 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     QuestionFragment  frag_question;
     NumberPadFragment frag_num_pad;
     String strChosenOperator;
+    public static boolean bDisableOrientationChanges = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //bDisableOrientationChanges = false;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
@@ -65,7 +69,8 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
         frag_question.cdTimer.cancel();
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        //bDisableOrientationChanges = true;
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         ExitDialog exit_dialog = new ExitDialog();
         exit_dialog.setCancelable(false);
