@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/operand1_textview" />
 
     <TextView
         android:id="@+id/operand1_textview"
