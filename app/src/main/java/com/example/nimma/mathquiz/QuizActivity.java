@@ -1,7 +1,12 @@
 package com.example.nimma.mathquiz;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,39 +56,22 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         //Call the method in there with the new data
         frag_question.updateAnswer(strInput);
-    } 
+    }
 
 
     @Override
     public void onBackPressed() {
         //Pause timer as we wait for user input
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+        frag_question.cdTimer.cancel();
 
-        new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Exit Quiz?")
-                .setMessage("Are you sure you want to exit this Quiz?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        frag_question.cdTimer.cancel();
-                        //Drop all data
-                        frag_question.strLatestAnswer = "";
-                        frag_question.bInitialAnswerNotChanged = true;
-                        frag_question.numQuestionsSoFar = 0;
-                        frag_question.numScore = 0;
-                        frag_question.QUESTION_TIMER =  5000;
-                        frag_question.startTime = 0;
-                        frag_question.endTime = 0;
-                        frag_question.TIME_REMAINING = 5000;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
-                        finish();
-                    }
+        ExitDialog exit_dialog = new ExitDialog();
+        exit_dialog.setCancelable(false);
+        exit_dialog.show(getFragmentManager(), "ExitDialog");
 
-                })
-                .setNegativeButton("No", null)
-                .show();
     }
 
 }
+
