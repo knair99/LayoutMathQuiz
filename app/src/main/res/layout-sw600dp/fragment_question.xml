@@ -54,15 +54,16 @@
         android:gravity="center"
         android:text="="
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/quiz_icon_placeholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/answer_textview"
-        android:layout_alignParentEnd="true"
-        app:srcCompat="@mipmap/question" />
+        app:srcCompat="@mipmap/question"
+        android:layout_below="@+id/answer_textview"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
