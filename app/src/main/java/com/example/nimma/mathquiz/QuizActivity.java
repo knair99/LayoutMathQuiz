@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,6 +31,8 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //Make sure we know the fragment instances
         frag_num_pad = (NumberPadFragment) getFragmentManager().findFragmentById(R.id.numberpad_fragment);
@@ -42,6 +46,27 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
         }
 
      }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home: {
+                //Pause timer as we wait for user input
+                frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+                frag_question.cdTimer.cancel();
+
+                //bDisableOrientationChanges = true;
+                //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+
+                ExitDialog exit_dialog = new ExitDialog();
+                exit_dialog.setCancelable(false);
+                exit_dialog.show(getFragmentManager(), "ExitDialog");
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     //Handle any button clicked from the number pad here and pass it to the fragment
     public void btnOnClickNum(View view) {
