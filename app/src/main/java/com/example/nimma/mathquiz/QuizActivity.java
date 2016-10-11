@@ -51,11 +51,14 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         //Call the method in there with the new data
         frag_question.updateAnswer(strInput);
-    }
+    } 
 
 
     @Override
     public void onBackPressed() {
+        //Pause timer as we wait for user input
+        frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Exit Quiz?")
@@ -64,6 +67,17 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        frag_question.cdTimer.cancel();
+                        //Drop all data
+                        frag_question.strLatestAnswer = "";
+                        frag_question.bInitialAnswerNotChanged = true;
+                        frag_question.numQuestionsSoFar = 0;
+                        frag_question.numScore = 0;
+                        frag_question.QUESTION_TIMER =  5000;
+                        frag_question.startTime = 0;
+                        frag_question.endTime = 0;
+                        frag_question.TIME_REMAINING = 5000;
+
                         finish();
                     }
 
@@ -71,4 +85,5 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
                 .setNegativeButton("No", null)
                 .show();
     }
+
 }

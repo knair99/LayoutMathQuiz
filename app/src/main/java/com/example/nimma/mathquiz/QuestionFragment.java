@@ -38,6 +38,7 @@ public class QuestionFragment extends Fragment {
     public static final String NUM_QUESTIONS_SO_FAR = "NUM_QUESTIONS_SO_FAR";
     public static final String STR_TIME_REMAINING = "TIME_REMAINING";
     public static final int TOTAL_QUESTIONS = 10;
+    public static final String STR_QUIZ_OVER = "STR_QUIZ_OVER";
 
 
     //These are changeables
@@ -58,9 +59,7 @@ public class QuestionFragment extends Fragment {
     public static String strAnsParsed;
     public static String strChosenOperator;
 
-    //Hail mary timer
-    public MyTimerTask my_timer_task;
-    public Timer timer;
+    //Countdown timer
     public boolean bQuizOver = false;
     public CountDownTimer cdTimer;
 
@@ -88,6 +87,7 @@ public class QuestionFragment extends Fragment {
             numQuestionsSoFar = savedInstanceState.getInt(NUM_QUESTIONS_SO_FAR);
 
             TIME_REMAINING = savedInstanceState.getLong(STR_TIME_REMAINING);
+            bQuizOver = savedInstanceState.getBoolean(STR_QUIZ_OVER);
         }
         else {
             //Generate random numbers
@@ -110,9 +110,7 @@ public class QuestionFragment extends Fragment {
                 numQuestionsSoFar = 0; //Remember to reset the questions so far, to restart the game from home
                 numScore = 0; //Same for score
                 //Cancel the timer?
-                if(my_timer_task!= null){
-                    my_timer_task.cancel();
-                }
+                //cdTimer.cancel();
                 bQuizOver = true;
             }
 
@@ -145,62 +143,26 @@ public class QuestionFragment extends Fragment {
         //ScheduleNewQuestion();
         if(!bQuizOver) {
             //ScheduleNewTimer();
-
-            cdTimer = new CountDownTimer(TIME_REMAINING, 1000) {
-
-                public void onTick(long millisUntilFinished) {
-                    //Countdown logic here
-                }
-
-                public void onFinish() {
-                    SetImageForAnswer("wrong");
-                    MoveToNextQuestion();
-                }
-            }.start();
+            CreateAndStartTimer();
         }
 
         return rootview;
     }
 
-/*
-    private void ScheduleNewQuestion() {
-        //Change the question in 5 seconds
-        new Timer().schedule(new TimerTask(){
-            public void run() {
-                if(getActivity() != null) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            SetImageForAnswer("wrong");
-                            MoveToNextQuestion();
-                        }
-                    });
-                }
+    public void CreateAndStartTimer() {
+        cdTimer = new CountDownTimer(TIME_REMAINING, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                //Countdown logic here
             }
-        }, TIME_REMAINING); //Time remaining for orientation changes
-    }
-*/
-    private void ScheduleNewTimer(){
 
-        if(bQuizOver) return;
-
-        my_timer_task = new MyTimerTask();
-        timer = new Timer();
-        timer.schedule(my_timer_task, TIME_REMAINING);
-    }
-
-    public class MyTimerTask extends TimerTask {
-        @Override
-        public void run() {
-            if (getActivity() != null) {
-                getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        SetImageForAnswer("wrong");
-                        MoveToNextQuestion();
-                    }
-                });
+            public void onFinish() {
+                SetImageForAnswer("wrong");
+                MoveToNextQuestion();
             }
-        }
+        }.start();
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -218,6 +180,8 @@ public class QuestionFragment extends Fragment {
         endTime = System.currentTimeMillis();
         TIME_REMAINING = QUESTION_TIMER - (endTime - startTime);
         outState.putLong(STR_TIME_REMAINING, TIME_REMAINING);
+
+        outState.putBoolean(STR_QUIZ_OVER, bQuizOver);
 
         //Cancel timer again?
         if(cdTimer != null) {
