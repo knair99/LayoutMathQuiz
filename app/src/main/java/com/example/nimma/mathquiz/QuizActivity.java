@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,12 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Init progressBar
         ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
@@ -41,6 +47,9 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         //Make sure we know the fragment instances
         frag_num_pad = (NumberPadFragment) getFragmentManager().findFragmentById(R.id.numberpad_fragment);
+        frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+
+        getSupportActionBar().setTitle("Question " + frag_question.numQuestionsSoFar + " out of 10");
 
         //Retrieve data from the home activity
         Bundle extras = getIntent().getExtras();

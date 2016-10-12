@@ -138,13 +138,6 @@ public class QuestionFragment extends Fragment {
             tv3.setText(strAnswerSoFar);
         }
 
-        //Set question number in action bar
-        String title = "MathQuiz  -  Q. " + numQuestionsSoFar + " out of 10";
-        AppCompatActivity ab = (AppCompatActivity) getActivity();
-        ab.getSupportActionBar().setTitle(title);
-
-
-
 
         //Schedule a new question for five seconds
         //ScheduleNewQuestion();

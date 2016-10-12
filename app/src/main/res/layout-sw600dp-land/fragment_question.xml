@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/progress_bar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,7 +15,7 @@
 
     <TextView
         android:id="@+id/operand1_textview"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar"
         android:text="21"
@@ -25,41 +24,45 @@
 
     <TextView
         android:id="@+id/operator_textview"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/operand2_textview"
         android:layout_below="@+id/operand1_textview"
         android:text="+"
         android:textAlignment="center"
-        android:textSize="50dp" />
+        android:textSize="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/operand2_textview"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/operator_textview"
         android:text="34"
         android:textAlignment="center"
-        android:textSize="50dp" />
+        android:textSize="50dp"
+        android:layout_alignParentEnd="true" />
 
 
     <TextView
         android:id="@+id/answer_textview"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/operand2_textview"
         android:layout_below="@+id/operand2_textview"
         android:text="="
         android:textAlignment="center"
-        android:textSize="50dp" />
+        android:textSize="50dp"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/quiz_icon_placeholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/answer_textview"
-        android:layout_toEndOf="@+id/answer_textview"
-        app:srcCompat="@mipmap/question" />
+        android:layout_below="@+id/answer_textview"
+        app:srcCompat="@mipmap/question"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
