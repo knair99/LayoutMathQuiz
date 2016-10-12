@@ -1,0 +1,27 @@
+./.idea/workspace.xml:    <property name="SearchEverywhereHistoryKey" value="operator_textview&#9;PSI&#9;JAVA://com.example.nimma.mathquiz.R.id#operator_textview" />
+./app/build/generated/source/r/debug/com/example/nimma/mathquiz/R.java:        public static final int operator_textview=0x7f0c007e;
+Binary file ./app/build/intermediates/classes/debug/com/example/nimma/mathquiz/R$id.class matches
+Binary file ./app/build/intermediates/incremental/packageDebug/zip-cache/J4JWfMmXuKOz+7YT1HgPTyKlpio= matches
+./app/build/intermediates/res/merged/debug/layout/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-land/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-land/fragment_question.xml:        android:layout_alignStart="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-land/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-sw600dp-land-v13/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-sw600dp-land-v13/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-sw600dp-v13/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/build/intermediates/res/merged/debug/layout-sw600dp-v13/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+Binary file ./app/build/intermediates/res/resources-debug.ap_ matches
+./app/build/intermediates/symbols/debug/R.txt:int id operator_textview 0x7f0c007e
+Binary file ./app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex matches
+Binary file ./app/build/outputs/apk/app-debug.apk matches
+./app/src/main/java/com/example/nimma/mathquiz/QuestionFragment.java:        TextView tvOperator = (TextView) getActivity().findViewById(R.id.operator_textview);
+./app/src/main/res/layout/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/src/main/res/layout/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/src/main/res/layout-land/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/src/main/res/layout-land/fragment_question.xml:        android:layout_alignStart="@+id/operator_textview"
+./app/src/main/res/layout-land/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/src/main/res/layout-sw600dp/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/src/main/res/layout-sw600dp/fragment_question.xml:        android:layout_below="@+id/operator_textview"
+./app/src/main/res/layout-sw600dp-land/fragment_question.xml:        android:id="@+id/operator_textview"
+./app/src/main/res/layout-sw600dp-land/fragment_question.xml:        android:layout_below="@+id/operator_textview"

@@ -44,7 +44,7 @@ public class QuestionFragment extends Fragment {
 
 
     //These are changeables
-    public static String strLatestAnswer;
+    public String strLatestAnswer = "=";
     public static boolean bInitialAnswerNotChanged = true;
     public static int numQuestionsSoFar = 0;
     public static int numScore = 0;
@@ -57,8 +57,9 @@ public class QuestionFragment extends Fragment {
     int numOperand1;
     int numOperand2;
     int numCorrectAnswer;
-    public static String strOperand1, strOperand2, strAnswerSoFar;
-    public static String strAnsParsed;
+    public static String strOperand1, strOperand2;
+    public String strAnswerSoFar = "";
+    public String strAnsParsed;
     public static String strChosenOperator;
 
     //Countdown timer
@@ -83,7 +84,8 @@ public class QuestionFragment extends Fragment {
             numOperand1 = savedInstanceState.getInt(NUM_OPERAND_1);
             numOperand2 = savedInstanceState.getInt(NUM_OPERAND_2);
 
-            strAnswerSoFar = savedInstanceState.getString(STR_LATEST_ANSWER);
+            strAnswerSoFar = savedInstanceState.getString(STR_ANSWER_SO_FAR);
+            strLatestAnswer = savedInstanceState.getString(STR_LATEST_ANSWER);
             bInitialAnswerNotChanged = savedInstanceState.getBoolean(BOOL_INIT_ANSWER_NOT_CHANGED);
             strChosenOperator = savedInstanceState.getString(STR_OPERATOR_CHOSEN);
 
@@ -140,7 +142,7 @@ public class QuestionFragment extends Fragment {
         //Set text view for answer (to handle orientation changes too)
         TextView tv3 = (TextView) rootview.findViewById(R.id.answer_textview);
         if(!bInitialAnswerNotChanged) {
-            tv3.setText(strAnswerSoFar);
+            tv3.setText(strLatestAnswer);
         }
 
 
@@ -228,7 +230,8 @@ public class QuestionFragment extends Fragment {
             strAnsParsed = strLatestAnswer.replaceAll("\\D+", "");
             if (Integer.parseInt(strAnsParsed) == numCorrectAnswer) {
                 numScore = numScore + 1;
-                strLatestAnswer = strAnswerSoFar = "=";
+                strLatestAnswer = "=";
+                strAnswerSoFar = "=";
                 //Stop the countdowntimer
                 cdTimer.cancel();
                 SetImageForAnswer("correct");
@@ -242,13 +245,16 @@ public class QuestionFragment extends Fragment {
                 if (Integer.parseInt(strAnsParsed) != numCorrectAnswer) {
                     cdTimer.cancel();
                     SetImageForAnswer("wrong");
-                    strLatestAnswer = strAnswerSoFar = "=";
+                    strLatestAnswer = "=";
+                    strAnswerSoFar = "=";
                     MoveToNextQuestion();
                 }
             }
             else{
                 cdTimer.cancel();
                 SetImageForAnswer("wrong");
+                strLatestAnswer = "=";
+                strAnswerSoFar = "=";
                 MoveToNextQuestion();
             }
         }

@@ -132,7 +132,7 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     protected void onResume() {
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
         frag_question.bStartingTimeFromPause = true;
-        if(!frag_question.bQuizOver) {
+        if(!frag_question.bQuizOver && !frag_question.bDontStartTimer) {
             frag_question.CreateAndStartTimer();
         }
         super.onResume();
