@@ -52,11 +52,8 @@ public class ExitDialog extends DialogFragment {
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                         frag_question.bDontStartTimer = false;
                         frag_question.CreateAndStartTimer();
-                        //myActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-
                     }
                 });
 

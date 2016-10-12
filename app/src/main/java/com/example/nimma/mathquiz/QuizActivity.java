@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -41,6 +43,11 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.neela));
 
         //Init progressBar
         ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
@@ -132,7 +139,7 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     protected void onResume() {
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
         frag_question.bStartingTimeFromPause = true;
-        if(!frag_question.bQuizOver && !frag_question.bDontStartTimer) {
+        if(!frag_question.bQuizOver && !frag_question.bDontStartTimer){
             frag_question.CreateAndStartTimer();
         }
         super.onResume();

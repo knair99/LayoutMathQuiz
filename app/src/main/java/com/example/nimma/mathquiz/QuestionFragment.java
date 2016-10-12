@@ -41,6 +41,7 @@ public class QuestionFragment extends Fragment {
     public static final int TOTAL_QUESTIONS = 10;
     public static final String STR_QUIZ_OVER = "STR_QUIZ_OVER";
     public static final String STR_DONT_START_TIMER = "STR_DONT_START_TIMER";
+    public static final String STR_ORIENTATION_CHANGED = "STR_ORIENTATION_CHANGED";
 
 
     //These are changeables
@@ -67,6 +68,7 @@ public class QuestionFragment extends Fragment {
     public CountDownTimer cdTimer;
     public boolean bDontStartTimer = false;
     public static boolean bStartingTimeFromPause = false;
+    public boolean bOrientationHasChanged = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +98,7 @@ public class QuestionFragment extends Fragment {
             bQuizOver = savedInstanceState.getBoolean(STR_QUIZ_OVER);
 
             bDontStartTimer = savedInstanceState.getBoolean(STR_DONT_START_TIMER);
+
         }
         else {
             //Generate random numbers
@@ -197,6 +200,7 @@ public class QuestionFragment extends Fragment {
 
         outState.putBoolean(STR_QUIZ_OVER, bQuizOver);
         outState.putBoolean(STR_DONT_START_TIMER, bDontStartTimer);
+        outState.putBoolean(STR_ORIENTATION_CHANGED, bOrientationHasChanged);
 
         //Cancel timer again?
         if(cdTimer != null) {
