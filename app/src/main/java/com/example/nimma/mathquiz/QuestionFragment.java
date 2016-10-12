@@ -65,6 +65,7 @@ public class QuestionFragment extends Fragment {
     public boolean bQuizOver = false;
     public CountDownTimer cdTimer;
     public boolean bDontStartTimer = false;
+    public boolean bStartingTimeFromPause = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,6 +118,10 @@ public class QuestionFragment extends Fragment {
                 //Cancel the timer?
                 //cdTimer.cancel();
                 bQuizOver = true;
+
+                if(cdTimer != null){
+                    cdTimer.cancel();
+                }
             }
 
         }
@@ -140,16 +145,18 @@ public class QuestionFragment extends Fragment {
 
 
         //Schedule a new question for five seconds
-        //ScheduleNewQuestion();
-        if(!bQuizOver && !bDontStartTimer) {
-            //ScheduleNewTimer();
+        if(!bQuizOver && !bDontStartTimer && !bStartingTimeFromPause) {
             CreateAndStartTimer();
+            bStartingTimeFromPause = false;
         }
 
         return rootview;
     }
 
     public void CreateAndStartTimer() {
+        if(cdTimer != null){
+            cdTimer.cancel();
+        }
         cdTimer = new CountDownTimer(TIME_REMAINING, 1000) {
 
             public void onTick(long millisUntilFinished) {

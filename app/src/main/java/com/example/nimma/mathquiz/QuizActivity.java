@@ -25,6 +25,8 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     String strChosenOperator;
     public static boolean bDisableOrientationChanges = false;
 
+    public static long lastClock;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -117,5 +119,19 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
 
     }
 
+    @Override
+    protected void onPause() {
+        frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+        frag_question.cdTimer.cancel();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
+        frag_question.bStartingTimeFromPause = true;
+        frag_question.CreateAndStartTimer();
+        super.onResume();
+    }
 }
 
