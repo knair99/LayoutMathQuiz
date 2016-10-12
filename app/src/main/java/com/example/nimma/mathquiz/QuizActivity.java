@@ -122,7 +122,9 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     @Override
     protected void onPause() {
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
-        frag_question.cdTimer.cancel();
+        if(frag_question.cdTimer != null) {
+            frag_question.cdTimer.cancel();
+        }
         super.onPause();
     }
 
@@ -130,7 +132,9 @@ public class QuizActivity extends AppCompatActivity implements NumberPadFragment
     protected void onResume() {
         frag_question = (QuestionFragment) getFragmentManager().findFragmentById(R.id.question_fragment);
         frag_question.bStartingTimeFromPause = true;
-        frag_question.CreateAndStartTimer();
+        if(!frag_question.bQuizOver) {
+            frag_question.CreateAndStartTimer();
+        }
         super.onResume();
     }
 }

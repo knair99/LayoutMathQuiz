@@ -65,7 +65,7 @@ public class QuestionFragment extends Fragment {
     public boolean bQuizOver = false;
     public CountDownTimer cdTimer;
     public boolean bDontStartTimer = false;
-    public boolean bStartingTimeFromPause = false;
+    public static boolean bStartingTimeFromPause = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
